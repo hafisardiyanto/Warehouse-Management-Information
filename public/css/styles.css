@@ -1,0 +1,56 @@
+.text-secondary-color {
+    color: #198754;
+}
+
+.text-tersier-color {
+    color: #f7941d;
+}
+
+.bg-secondary-color {
+    background-color: #198754;
+}
+
+.bg-tersier-color {
+    background-color: #f7941d;
+}
+
+.pagination .page-link {
+    color: #f7941d !important;
+}
+
+/* Mengubah warna latar belakang saat link di-hover atau aktif */
+.pagination .active .page-link {
+    background-color: #f7941d !important;
+    border-color: #f7941d !important;
+    color: #ffffff !important;
+}
+
+.page-link:hover {
+    background-color: #ffe7ca !important;
+    border-color: #f7941d !important;
+    color: #000 !important;
+}
+
+.navigation-item{
+    font-weight:500;
+    color: #000;
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.navigation-item:hover{
+    background-color: #f7941d !important;
+}
+
+.row{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.nav-link.active {
+    background-color: orange;
+    /* Warna saat navbar aktif */
+    color: white;
+    /* Warna teks saat aktif */
+}
