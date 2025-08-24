@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-8 py-md-3">
                 <marquee behavior="scroll" direction="left" class="text-secondary-color"> Sistem Manajemen Pergudangan
-                    Cabai - Dinas Perindustrian dan Perdagangan Kabupaten Kebumen</marquee>
+                    Cabai </marquee>
             </div>
         </div>
         <div class="row" style="width: 100%">
@@ -91,8 +91,8 @@
                             <p class="mb-2">{{ $cabai->description }}</p>
                         @endif
                         @if ($cabai->komoditas_sum_quantity > 0)
-                            <a href="https://wa.me/6287870092987" class="btn btn-success mt-auto"><i
-                                    class="fa-solid fa-phone"></i> Pesan</a>
+                            <!-- <a href="https://wa.me/6287870092987" class="btn btn-success mt-auto"><i
+                                    class="fa-solid fa-phone"></i> Pesan</a> -->
                         @else
                             <button class="btn btn-secondary mt-auto" disabled><i class="fa-solid fa-phone-slash"></i>
                                 Pesan</button>
@@ -109,13 +109,13 @@
                 <h4 class="fw-bold text-white">Kontak Kami</h4>
                 <hr width="200px" class="text-tersier-color">
             </div>
-            <p class="text-white text-center mb-5 fst-italic" style="max-width: 780px">"Dari kebun ke meja, pasar
+            <!-- <p class="text-white text-center mb-5 fst-italic" style="max-width: 780px">"Dari kebun ke meja, pasar
                 cabai
                 kami menawarkan cabai terbaik untuk hidangan rasa pedas yang membangkitkan selera dan hidup sehat dengan
                 cabai segar, karena rasa pedas adalah teristimewa. Nikmati cinta yang hangat."</p>
             <p class="text-white">Jika ada pertanyaan bisa hubungi :</p>
             <h5 class="text-white">Koordinator Pasar Cabai</h5>
-            <h5 class="text-tersier-color fw-bold">Mas Taat (0878-7009-2987)</h5>
+            <h5 class="text-tersier-color fw-bold">Mas Taat (0878-7009-2987)</h5> -->
         </div>
     </section>
 

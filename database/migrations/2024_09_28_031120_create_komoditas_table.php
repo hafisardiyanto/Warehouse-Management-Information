@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('komoditas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cabai_id')->constrained('cabais');
+            $table->foreignId('cabai_id')->constrained('cabais')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('gudang_id')->nullable()->constrained('gudangs');
             $table->bigInteger('quantity');
