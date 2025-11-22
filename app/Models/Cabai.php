@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cabai extends Model
 {
-    use HasFactory;
+   use HasFactory;
+
+    protected $fillable = ['nama', 'jenis'];
+
     public function komoditas()
     {
-        return $this->hasMany(Komoditas::class, 'cabai_id');
+        return $this->hasMany(Komoditas::class);
     }
 }

@@ -32,11 +32,10 @@
                         <td scope="row">{{ $petani->email }}</td>
                         <td scope="row">{{ $petani->role }}</td>
                         <td scope="row">
-                            <form action="/petani/{{ $petani->id }}" method="post" class="d-inline"
-                                onsubmit="return confirm('Apa anda yakin akan menghapus data?')">
-                                @method('delete')
+                            <form action="{{ route('petani.destroy', $petani->id) }}" method="POST" onsubmit="return confirm('Yakin hapus?')">
                                 @csrf
-                                <button class="btn btn-danger">Delete</button>
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                             </form>
                         </td>
                     </tr>

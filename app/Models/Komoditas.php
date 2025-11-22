@@ -11,6 +11,13 @@ class Komoditas extends Model
 {
     use HasFactory;
 
+ protected $fillable = [
+        'cabai_id',
+        'user_id',
+        'gudang_id',
+        'quantity',
+        'status',
+    ];
 
     public function cabai(): BelongsTo
     {

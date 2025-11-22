@@ -37,6 +37,10 @@ Route::get('/dashboard', function () {
 Route::middleware('auth', isPengelolaGudang::class)->group(function () {
     Route::resource('cabai', CabaiController::class)->except(['show']);
     Route::resource('petani', PetaniController::class)->except(['show']);
+    Route::delete('/petani/{id}', [PetaniController::class, 'destroy'])->name('petani.destroy');
+    Route::get('/petani/{id}/edit-password', [PetaniController::class, 'editPassword'])->name('petani.editPassword');
+    Route::put('/petani/{id}/update-password', [PetaniController::class, 'updatePassword'])->name('petani.updatePassword');
+
 
     Route::resource('gudang', GudangController::class)->only(['index', 'create', 'store', 'show']);
     Route::post('/gudang/{komoditas}/sell', [GudangController::class, 'sell'])->name('sell');
