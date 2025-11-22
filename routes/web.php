@@ -34,13 +34,25 @@ Route::get('/dashboard', function () {
     }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth', isPengelolaGudang::class)->group(function () {
-    Route::resource('cabai', CabaiController::class)->except(['show']);
-    Route::resource('petani', PetaniController::class)->except(['show']);
-    Route::delete('/petani/{id}', [PetaniController::class, 'destroy'])->name('petani.destroy');
-    Route::get('/petani/{id}/edit-password', [PetaniController::class, 'editPassword'])->name('petani.editPassword');
-    Route::put('/petani/{id}/update-password', [PetaniController::class, 'updatePassword'])->name('petani.updatePassword');
+Route::middleware(['auth', isPengelolaGudang::class])->group(function () {
 
+    // ---------- ROUTE PETANI (MANUAL, TANPA RESOURCE) ----------
+    Route::get('petani', [PetaniController::class, 'index'])->name('petani.index');
+    Route::get('petani/create', [PetaniController::class, 'create'])->name('petani.create');
+    Route::post('petani', [PetaniController::class, 'store'])->name('petani.store');
+
+    // 👉 EDIT & UPDATE PASSWORD
+    Route::get('petani/{id}/edit-password', [PetaniController::class, 'editPassword'])
+        ->name('petani.editPassword');
+
+    Route::put('petani/{id}/update-password', [PetaniController::class, 'updatePassword'])
+        ->name('petani.updatePassword');
+
+    // HAPUS PETANI
+    Route::delete('petani/{id}', [PetaniController::class, 'destroy'])->name('petani.destroy');
+
+    // ---------- ROUTE LAIN TETAP ----------
+    Route::resource('cabai', CabaiController::class)->except(['show']);
 
     Route::resource('gudang', GudangController::class)->only(['index', 'create', 'store', 'show']);
     Route::post('/gudang/{komoditas}/sell', [GudangController::class, 'sell'])->name('sell');

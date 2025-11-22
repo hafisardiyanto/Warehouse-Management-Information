@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash; // <-- tambahkan ini
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\Hash;
 
 class PetaniController extends Controller
 {
     public function index()
     {
+        // hanya user dengan role 'petani' (kalau mau filter). 
+        // Kalau mau semua user, ganti jadi: User::paginate(10);
         $petanis = User::paginate(10);
-        return view('petani.index', ['petanis' => $petanis]);
+
+        return view('petani.index', compact('petanis'));
     }
 
     public function create()
@@ -23,43 +25,27 @@ class PetaniController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => ['required', 'email', 'unique:users'],
-            'role' => 'required',
-            'password' => ['required', 'confirmed'],
+            'name'     => 'required',
+            'email'    => ['required', 'email', 'unique:users'],
+            'role'     => 'required',
+            'password' => ['required', 'confirmed', 'min:6'],
         ]);
 
         $petani = new User();
-        $petani->name = $request->name;
+        $petani->name  = $request->name;
         $petani->email = $request->email;
-        $petani->role = $request->role;
+        $petani->role  = $request->role;
 
-        // WAJIB: hash password
+        // WAJIB: simpan password dalam bentuk hash (bcrypt)
         $petani->password = Hash::make($request->password);
 
         $petani->save();
 
-        return redirect('/petani')->with("status", "Data Berhasil di Tambahkan");
+        return redirect()->route('petani.index')
+            ->with("status", "Data Petani berhasil ditambahkan");
     }
 
-  public function destroy($id)
-    {
-        DB::transaction(function () use ($id) {
-            $petani = User::findOrFail($id);
-
-            // 1. Hapus semua komoditas milik user ini
-            $petani->komoditas()->delete();
-
-            // 2. Baru hapus user-nya
-            $petani->delete();
-        });
-
-        return redirect('/petani')->with("status", "Data Berhasil di Hapus");
-    }
-    
-
-    // ...
-   public function editPassword($id)
+  public function editPassword($id)
 {
     $petani = User::findOrFail($id);
     return view('petani.edit-password', compact('petani'));
@@ -72,13 +58,18 @@ public function updatePassword(Request $request, $id)
     ]);
 
     $petani = User::findOrFail($id);
-
-    // update password dengan hash
-    $petani->password = Hash::make($request->password);
+    $petani->password = \Illuminate\Support\Facades\Hash::make($request->password);
     $petani->save();
 
-    return redirect('/petani')->with("status", "Password berhasil diperbarui!");
+    return redirect()->route('petani.index')->with('status', 'Password petani berhasil diperbarui');
 }
 
+    public function destroy($id)
+    {
+        $petani = User::findOrFail($id);
+        $petani->delete();
+
+        return redirect()->route('petani.index')
+            ->with("status", "Data Petani berhasil dihapus");
+    }
 }
-    
