@@ -7,16 +7,18 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class IsPengelolaGudang
+class IsAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
+        // kalau belum login
         if (!Auth::check()) {
             return redirect('/login');
         }
 
-        if (Auth::user()->role !== 'pengelola_gudang') {
-            return redirect('/komoditas');
+        // kalau bukan admin
+        if (Auth::user()->role !== 'admin') {
+            abort(403, 'Akses hanya untuk admin');
         }
 
         return $next($request);
