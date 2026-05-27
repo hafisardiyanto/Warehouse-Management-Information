@@ -15,7 +15,7 @@ class IsPengelolaGudang
             return redirect('/login');
         }
 
-        if (Auth::user()->role !== 'pengelola_gudang') {
+        if (!in_array(Auth::user()->role, ['pengelola_gudang', 'admin'])) {
             return redirect('/komoditas');
         }
 

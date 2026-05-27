@@ -29,7 +29,7 @@ Route::get('/', function () {
 */
 Route::get('/dashboard', function () {
 
-    if (auth()->user()->role !== 'pengelola_gudang') {
+    if (!in_array(auth()->user()->role, ['pengelola_gudang', 'admin'])) {
         return redirect('/komoditas');
     }
 
