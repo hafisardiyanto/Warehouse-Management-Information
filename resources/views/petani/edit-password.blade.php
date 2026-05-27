@@ -18,6 +18,6 @@
         </div>
 
         <button type="submit" class="btn btn-success">Update Password</button>
-        <a href="{{ url('/petani') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ url()->previous() }}" class="btn btn-secondary ms-2">Kembali</a>
     </form>
 </x-dashboard>

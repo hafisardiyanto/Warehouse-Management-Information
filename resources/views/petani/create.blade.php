@@ -42,5 +42,6 @@
             </select>
         </div>
         <button class="btn btn-warning bg-tersier-color text-white">Tambah</button>
+        <a href="{{ url()->previous() }}" class="btn btn-secondary ms-2">Kembali</a>
     </form>
 </x-dashboard>

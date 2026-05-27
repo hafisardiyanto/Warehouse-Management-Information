@@ -1,5 +1,6 @@
 <x-dashboard title="Gudang">
     <h3>Gudang {{ $gudang->name }}</h3>
+    <a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">Kembali</a>
     <hr>
     @if (session('status'))
         <div class="alert alert-success alert-dismissible fade show my-3" style="width: 100%" role="alert">
