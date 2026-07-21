@@ -4,7 +4,6 @@ vendor
 .env
 Dockerfile
 docker-compose.yml
-docker
 storage/*.key
 .phpunit.result.cache
 npm-debug.log
