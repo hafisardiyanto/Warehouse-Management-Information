@@ -34,6 +34,9 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # Copy application code
 COPY . .
 
+# Install PHP dependencies
+RUN composer install --no-interaction --optimize-autoloader --no-dev
+
 # Copy built assets from Stage 1
 COPY --from=build /app/public/build ./public/build
 
