@@ -9,6 +9,12 @@ services:
     restart: unless-stopped
     volumes:
       - .:/var/www/html
+    environment:
+      DB_HOST: warehouse_db
+      DB_PORT: 3306
+      DB_DATABASE: laravelgudang
+      DB_USERNAME: root
+      DB_PASSWORD: ""
     networks:
       - warehouse_network
 
@@ -31,10 +37,8 @@ services:
     container_name: warehouse_db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USER}
+      MYSQL_DATABASE: laravelgudang
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - warehouse_dbdata:/var/lib/mysql
     networks:
@@ -49,7 +53,7 @@ services:
     environment:
       PMA_HOST: warehouse_db
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ""
     networks:
       - warehouse_network
     depends_on:
