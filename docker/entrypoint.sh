@@ -27,6 +27,9 @@ echo "Database is ready!"
 # Run migrations
 php artisan migrate --force
 
+# Ensure write permissions for storage and bootstrap/cache
+chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Cache configuration and routes
 php artisan config:cache
 php artisan route:cache
