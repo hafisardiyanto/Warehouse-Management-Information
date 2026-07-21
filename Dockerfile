@@ -1,13 +1,16 @@
 # Stage 1: Build assets
-FROM node:20-alpine AS build
+FROM docker.io/library/node:20-alpine AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2: PHP application
-FROM php:8.2-fpm-alpine
+# Stage 2: Composer (explicit stage so Podman can resolve it)
+FROM docker.io/library/composer:latest AS composer
+
+# Stage 3: PHP application
+FROM docker.io/library/php:8.2-fpm-alpine
 WORKDIR /var/www/html
 
 # Install system dependencies
@@ -25,8 +28,8 @@ RUN apk add --no-cache \
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl zip
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install Composer (copy from explicit composer stage)
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Copy application code
 COPY . .
